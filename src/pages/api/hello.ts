@@ -20,7 +20,7 @@ export default async function handler(
   const page = await browser.newPage();
   await page.setBypassCSP(true);
 
-  await page.goto('https://nus.com');
+  await page.goto('https://google.com');
 
   const results = await new AxePuppeteer(page).analyze();
   console.log(results);

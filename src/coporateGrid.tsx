@@ -1,37 +1,49 @@
 import * as React from 'react';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
-import { Box } from '@mui/material';
+import { Box, Button } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
 
 const columns: GridColDef[] = [
-  { field: 'id', headerName: 'NO.', flex: 1, disableColumnMenu: true},
-  { field: 'url', headerName: 'WEBSITE URL', flex: 2, disableColumnMenu: true},
-  { field: 'eval', headerName: 'NO. OF EVALUATIONS', flex: 1, headerAlign: 'center'},
+  { field: 'id', 
+    headerName: 'NO.', 
+    flex: 1, 
+    disableColumnMenu: true, 
+    disableReorder: true},
+
+  { field: 'url', 
+    headerName: 'WEBSITE URL', 
+    flex: 2, 
+    disableColumnMenu: true, 
+    disableReorder: true},
+
+  { field: 'eval', 
+    headerName: 'NO. OF EVALUATIONS', 
+    flex: 1, 
+    headerAlign: 'center', 
+    align: 'center', 
+    disableReorder: true},
+
   {
     field: 'time',
     headerName: 'SUBMITTED ON',
-    type: 'number',
     flex: 1,
-    headerAlign: 'center'
+    headerAlign: 'center',
+    align: 'center'
   },
+
   {
     field: 'count',
     headerName: 'ACCESSBILITY ISSUES',
+    type: 'number',
     flex: 1,
-    headerAlign: 'center'
+    headerAlign: 'center',
+    align: 'center'
   }
 ];
 
 const rows = [
 
-  { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-  { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-  { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-  { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-  { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-  { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-  { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-  { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-  { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
+  { id: 1, url: 'https://google.com', eval: '10', time: "8/2/2023 08:00" , count: 13 },
 
 ];
 
@@ -39,10 +51,16 @@ export default function DataTable() {
   return (
 
     <Box sx={{width: '80%', paddingTop: '5%'}}>
+      <Button sx={{backgroundColor: "#E0E0E0", color: "#000000DE", borderRadius: "15px", marginBottom: '2%', gap: '10px'}} 
+        disableFocusRipple
+        disableRipple
+        startIcon={<AddIcon/>}>
+            NEW ASSESSMNENT
+        </Button>      
       <DataGrid
         rows={rows}
         columns={columns}
-        pageSize={4}
+        pageSize={5}
         rowsPerPageOptions={[10]}
         autoHeight
         density = 'comfortable'
