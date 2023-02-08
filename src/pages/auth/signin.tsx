@@ -5,9 +5,10 @@ import Fab from '@mui/material/Fab';
 import { Container } from "@mui/material";
 import styles from '../../styles/Signin.module.css'
 import cx from 'classnames';
-import { ST } from "next/dist/shared/lib/utils";
+import Image from "next/image";
+import logo from "../../../public/inclusion_lab_photo.png"
 
-interface Props {}
+interface Props { }
 
 
 const SignIn: NextPage = (props): JSX.Element => {
@@ -18,18 +19,15 @@ const SignIn: NextPage = (props): JSX.Element => {
             </Head>
 
             <Container>
+                <Stack direction="row" alignItems="center">
+                    <div style={{ borderTop: "10px solid #17475F", width: 321, height: 0 }}></div>
+                    <Image src={logo} alt="Inclusion Lab Logo" height={192} width={811} />
+                    <div style={{ borderTop: "10px solid #17475F", width: 321, height: 0 }}></div>
+                </Stack>
+
                 <div className={cx(styles["sign-in-form"])}>
                     <form>
                         <h1>User Login</h1>
-                        {/* <Stack direction="row" spacing={2} marginBottom={2}>
-                            <label>Username:</label>
-                            <input type="text" placeholder="Username" />
-                        </Stack>
-
-                        <Stack direction="row" spacing={2} marginBottom={5}>
-                            <label>Password:</label>
-                            <input type="password" placeholder="Password" />
-                        </Stack> */}
 
                         <Stack direction="row" spacing={2} marginBottom={5} textAlign="center">
                             <Stack direction="column" spacing={5} paddingTop={1}>
@@ -42,10 +40,10 @@ const SignIn: NextPage = (props): JSX.Element => {
                                 <input type="password" placeholder="Password" />
                             </Stack>
                         </Stack>
-                        
+
                         <Stack direction="row" spacing={4} justifyContent="center">
-                            <Fab aria-label="assessor-login" variant="extended" color="primary" size="medium">Assessor Login</Fab> 
-                            <Fab aria-label="corporate-login" variant="extended" color="secondary" size="medium">Coporate Login</Fab>
+                            <Fab aria-label="assessor-login" variant="extended">Assessor Login</Fab>
+                            <Fab aria-label="corporate-login" variant="extended">Coporate Login</Fab>
                         </Stack>
                     </form>
                 </div>
