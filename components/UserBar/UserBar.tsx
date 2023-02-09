@@ -1,8 +1,14 @@
 import { Fab } from "@mui/material";
 import styles from "./UserBar.module.css";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 const UserBar = (props: { isAssessor: boolean }) => {
+  const router = useRouter();
+  const handleLogout = () => {
+    router.push("/");
+  };
+
   return (
     <div className={styles.description}>
       <div>
@@ -17,7 +23,9 @@ const UserBar = (props: { isAssessor: boolean }) => {
         <Fab sx={{ margin: "0 20px" }} variant="extended">
           MY PROFILE
         </Fab>
-        <Fab variant="extended">LOG OUT</Fab>
+        <Fab variant="extended" onClick={handleLogout}>
+          LOG OUT
+        </Fab>
       </div>
     </div>
   );

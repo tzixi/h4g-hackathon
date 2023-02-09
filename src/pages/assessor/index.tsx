@@ -3,8 +3,6 @@ import Image from "next/image";
 import Head from "next/head";
 import DataGridDemo from "../../../components/table/demo";
 import styles from "./assessor.module.css";
-import { fontWeight } from "@mui/system";
-import { Fab } from "@mui/material";
 import UserBar from "components/UserBar/UserBar";
 
 function Home() {
