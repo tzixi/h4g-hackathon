@@ -4,7 +4,7 @@ import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
 import DataTable from './coporateGrid'
 import Header from './header';
-import FullWidthTextField from '@/pages/coporate/autoTest';
+import FullWidthTextField from '@/pages/corporate/autoTest';
 import { useState } from 'react';
 
 export default function Diagnostic() {
