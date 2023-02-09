@@ -43,7 +43,7 @@ const SignIn: NextPage = (props): JSX.Element => {
                             </Stack>
 
                             <Stack direction="row" spacing={4} justifyContent="center">
-                                <Fab aria-label="assessor-login" variant="extended" onClick={() => {console.log("Assossor Login Pressed!")}}>Assessor Login</Fab>
+                                <Fab aria-label="assessor-login" variant="extended" onClick={() => {console.log("Assessor Login Pressed!")}}>Assessor Login</Fab>
                                 <Fab aria-label="corporate-login" variant="extended" onClick={() => {console.log("Corporate Login Pressed!")}}>Corporate Login</Fab>
                             </Stack>
                         </form>
