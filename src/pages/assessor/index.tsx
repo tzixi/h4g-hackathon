@@ -5,10 +5,11 @@ import DataGridDemo from "../../../components/table/demo";
 import styles from "./assessor.module.css";
 import { fontWeight } from "@mui/system";
 import { Fab } from "@mui/material";
+import UserBar from "components/UserBar/UserBar";
 
 function Home() {
   return (
-    <div style={{ padding: "20px" }}>
+    <div style={{ padding: "20px", width: "100%" }}>
       <Head>
         <title>Assessor Page</title>
       </Head>
@@ -21,23 +22,7 @@ function Home() {
       >
         <Image src="/InclusionLabLogo.png" alt="me" width="500" height="118" />
       </div>
-      <div style={{ backgroundColor: "#f9f9f9" }}>
-        <div className={styles.description}>
-          <div>
-            <p style={{ fontSize: "20px", fontWeight: "700" }}>
-              ASSESSOR DASHBOARD - TAN AH GOW
-            </p>
-          </div>
-          <div></div>
-          <div className={styles.right}>
-            <Image src="/user.png" alt="profile" width="50" height="50" />
-            <Fab sx={{ margin: "0 20px" }} variant="extended">
-              MY PROFILE
-            </Fab>
-            <Fab variant="extended">LOG OUT</Fab>
-          </div>
-        </div>
-      </div>
+      <UserBar isAssessor />
       <div style={{ backgroundColor: "#f9f9f9" }}>
         <div className={styles.left}>
           <p style={{ fontSize: "20px", fontWeight: "700" }}>
