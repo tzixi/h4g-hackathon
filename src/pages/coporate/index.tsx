@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { Box, Stack, Typography, Divider, Button, Modal, IconButton, Grid, CircularProgress } from '@mui/material';
+import { Box, Stack, Typography, Button, Modal, IconButton, Grid, CircularProgress } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
-import DataTable from '../coporateGrid'
-import Header from '../header';
-import FullWidthTextField from '@/autoTest';
+import DataTable from './coporateGrid'
+import Header from './header';
+import FullWidthTextField from '@/pages/coporate/autoTest';
 import { useState } from 'react';
 
 export default function Diagnostic() {
@@ -44,8 +44,13 @@ export default function Diagnostic() {
           <Stack width={'100%'} alignItems='center' spacing={5}>
           <Header/>
           <FullWidthTextField/>
-          <Button onClick={callAPI} variant="contained" startIcon={<AddIcon/>} 
-            sx={{backgroundColor: "white", color: "#000000DE", borderRadius: "15px"}}
+          <Button onClick={callAPI} startIcon={<AddIcon/>} 
+            sx={{backgroundColor: "white", 
+            color: "#000000DE", 
+            borderRadius: "15px", 
+            width: '171px', 
+            height: '50px', 
+            fontSize: '15px'}}
             disableFocusRipple
             disableRipple
             >
@@ -79,7 +84,7 @@ export default function Diagnostic() {
           {isLoading?
           <Box sx={{ display: 'flex',position: 'fixed', /* or absolute */
           top: '40%',
-          left: '50%' }}>
+          left: '47%' }}>
             <CircularProgress size={'5rem'}/>
           </Box> :
           /* Load result when done */
@@ -100,7 +105,7 @@ export default function Diagnostic() {
                 </Typography>
                 <Box display={'flex'} flex={3} justifyContent={'center'} sx={{paddingTop: '5%'}}>
                 <Grid display={'flex'} spacing={3}>
-                    <Button variant='contained' startIcon ={<AddIcon/>} 
+                    <Button startIcon ={<AddIcon/>} 
                       sx={{backgroundColor: "#E0E0E0", 
                       color: "#000000DE", 
                       borderRadius: "15px", 
@@ -115,10 +120,7 @@ export default function Diagnostic() {
           </Grid>
           </Box>}
         </Box>
-      </Modal>
-
-      
-      
+      </Modal> 
     </Box>
   );
 }

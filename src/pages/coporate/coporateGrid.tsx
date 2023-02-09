@@ -51,11 +51,16 @@ export default function DataTable() {
   return (
 
     <Box sx={{width: '80%', paddingTop: '5%'}}>
-      <Button sx={{backgroundColor: "#E0E0E0", color: "#000000DE", borderRadius: "15px", marginBottom: '2%', gap: '10px'}} 
+      <Button sx={{backgroundColor: "#E0E0E0", 
+      color: "#000000DE", 
+      borderRadius: "64px", 
+      marginBottom: '2%', 
+      gap: '10px', 
+      width: '202px', height: '50px', fontSize: '15px', alignSelf: 'right'}} 
         disableFocusRipple
         disableRipple
         startIcon={<AddIcon/>}>
-            NEW ASSESSMNENT
+            NEW ASSESSMENT
         </Button>      
       <DataGrid
         rows={rows}
