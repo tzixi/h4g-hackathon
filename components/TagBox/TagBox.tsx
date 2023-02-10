@@ -103,6 +103,7 @@ const TagBox = (props: {
   forward: any;
   back: any;
   remarks: any;
+  submit: any;
 }) => {
   const [selectedTags, setSelectedTags] = useState([] as string[]);
   const [currStage, setStage] = useState(props.stage);
@@ -154,10 +155,6 @@ const TagBox = (props: {
     props.back();
   };
 
-  const handleSubmit = () => {
-    console.log(props.resultArr);
-  };
-
   return (
     <div className={styles.main}>
       <div className={styles.banner}>
@@ -181,7 +178,7 @@ const TagBox = (props: {
           <Fab
             sx={{ alignContent: "center", padding: "0px 10px", width: "200px" }}
             variant="extended"
-            onClick={handleSubmit}
+            onClick={props.submit}
           >
             SUBMIT
             <ArrowForwardIosIcon />

@@ -7,6 +7,7 @@ import styles from "./evaluation.module.css";
 import Fab from "@mui/material/Fab";
 import TagBox from "components/TagBox/TagBox";
 import { useState } from "react";
+import axios from "axios";
 function assessorEvaluation() {
   const [currStage, setStage] = useState(0);
   const [stageArr, setStageArr] = useState([[], [], [], []] as string[][]);
@@ -35,6 +36,30 @@ function assessorEvaluation() {
       newArr[currStage] = remark;
       return newArr;
     });
+  };
+
+  const handleSubmit = async () => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      };
+      const response = await axios.post(
+        "https://asia-southeast1-starlit-array-328711.cloudfunctions.net/hack4good/api/assessment/result/add",
+        {
+          url: "https://twilio.com",
+          disability: "Dyslexia and Epilepsy",
+          evalTags: JSON.stringify(stageArr),
+          evalRemarks: JSON.stringify(remarks),
+        },
+        config
+      );
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      console.error(error);
+    }
   };
   return (
     <div style={{ width: "100%", padding: "10px" }}>
@@ -93,6 +118,7 @@ function assessorEvaluation() {
             forward={handleForward}
             stage={currStage}
             remarks={handleRemarks}
+            submit={handleSubmit}
           />
         </div>
       </div>
