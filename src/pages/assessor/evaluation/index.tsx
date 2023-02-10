@@ -10,6 +10,7 @@ import { useState } from "react";
 function assessorEvaluation() {
   const [currStage, setStage] = useState(0);
   const [stageArr, setStageArr] = useState([[], [], [], []] as string[][]);
+  const [remarks, setRemarks] = useState(["", "", "", ""]);
 
   const handleResult = (result: string[]) => {
     setStageArr((prev) => {
@@ -26,6 +27,14 @@ function assessorEvaluation() {
   const handleBack = () => {
     setStage(currStage - 1);
     console.log(stageArr);
+  };
+  const handleRemarks = (remark: string) => {
+    console.log(remarks);
+    setRemarks((prev) => {
+      const newArr = [...prev];
+      newArr[currStage] = remark;
+      return newArr;
+    });
   };
   return (
     <div style={{ width: "100%", padding: "10px" }}>
@@ -77,11 +86,13 @@ function assessorEvaluation() {
             </Fab>
           </div>
           <TagBox
+            key={currStage}
             resultArr={stageArr}
             setResult={handleResult}
             back={handleBack}
             forward={handleForward}
             stage={currStage}
+            remarks={handleRemarks}
           />
         </div>
       </div>
