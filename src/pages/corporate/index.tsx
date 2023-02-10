@@ -2,8 +2,8 @@ import * as React from 'react';
 import { Box, Stack, Typography, Button, Modal, IconButton, Grid, CircularProgress, TextField } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
-import DataTable from './coporateGrid'
-import Header from './header';
+import DataTable from '../../../components/coporateGrid'
+import Header from '../../../components/header';
 import Head from "next/head";
 import Image from 'next/image';
 import { useState } from 'react';
