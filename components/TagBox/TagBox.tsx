@@ -102,11 +102,24 @@ const TagBox = (props: {
   stage: number;
   forward: any;
   back: any;
+  remarks: any;
+  submit: any;
 }) => {
   const [selectedTags, setSelectedTags] = useState([] as string[]);
-  const [currStage, setStage] = useState(0);
+  const [currStage, setStage] = useState(props.stage);
   const [NTagsArr, setNTags] = useState([] as string[]);
   const [PTagsArr, setPTags] = useState([] as string[]);
+  const [remarks, setRemarks] = useState("");
+
+  useEffect(() => {
+    if (
+      props.resultArr.length > currStage &&
+      props.resultArr[currStage].length !== 0
+    ) {
+      setSelectedTags(props.resultArr[currStage]);
+    }
+  }, []);
+
   useEffect(() => {
     setSelectedTags(() => [...PTagsArr, ...NTagsArr]);
   }, [PTagsArr, NTagsArr]);
@@ -120,7 +133,9 @@ const TagBox = (props: {
     let emptyArr = [] as string[];
     setSelectedTags(emptyArr);
   }, [currStage]);
-
+  useEffect(() => {
+    props.remarks(remarks);
+  }, [remarks]);
   const handlePTagChange = (tags: string[]) => {
     setPTags(tags);
   };
@@ -138,14 +153,10 @@ const TagBox = (props: {
     props.back();
   };
 
-  const handleSubmit = () => {
-    console.log(props.resultArr);
-  };
-
   return (
     <div className={styles.main}>
       <div className={styles.banner}>
-        {currStage === 0 ? (
+        {/* {currStage === 0 ? (
           ""
         ) : (
           <Fab
@@ -156,23 +167,23 @@ const TagBox = (props: {
             <ArrowBackIosIcon />
             BACK
           </Fab>
-        )}
+        )} */}
         <div style={{ margin: "0px 20px" }}>
           <h2>{BannerText[currStage] + ":"}</h2>
           <p>{BannerDesc[currStage]}</p>
         </div>
         {currStage === 3 ? (
           <Fab
-            sx={{ alignContent: "center", padding: "0px 10px" }}
+            sx={{ alignContent: "center", padding: "0px 10px", width: "200px" }}
             variant="extended"
-            onClick={handleSubmit}
+            onClick={props.submit}
           >
             SUBMIT
             <ArrowForwardIosIcon />
           </Fab>
         ) : (
           <Fab
-            sx={{ alignContent: "center" }}
+            sx={{ alignContent: "center", width: "200px" }}
             variant="extended"
             onClick={handleForward}
           >
@@ -199,10 +210,11 @@ const TagBox = (props: {
           />
         </div>
       </div>
-      {selectedTags.length !== 0 ? (
+      {props.resultArr.length > currStage &&
+      props.resultArr[currStage].length !== 0 ? (
         <h3>
           You have selected:
-          {" " + selectedTags.join(", ")}
+          {" " + props.resultArr[currStage].join(", ")}
         </h3>
       ) : (
         ""
@@ -220,6 +232,9 @@ const TagBox = (props: {
         <h2 style={{ color: "black" }}>Additional Remarks:</h2>
         <TextField
           placeholder="Enter Remarks here"
+          onChange={(e) => {
+            setRemarks(e.target.value);
+          }}
           sx={{ width: "100%" }}
           multiline
           variant="outlined"
