@@ -145,13 +145,11 @@ const TagBox = (props: {
 
   const handleForward = () => {
     setStage(currStage + 1);
-    console.log(currStage);
     props.forward();
   };
 
   const handleBack = () => {
     setStage(currStage - 1);
-    console.log(currStage);
     props.back();
   };
 
