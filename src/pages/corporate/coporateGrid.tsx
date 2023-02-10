@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridValueGetterParams, GridValueFormatterParams } from '@mui/x-data-grid';
 import { Box, Button } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
+import { useState, useEffect } from 'react';
 
 const columns: GridColDef[] = [
   { field: 'id', 
@@ -16,7 +17,7 @@ const columns: GridColDef[] = [
     disableColumnMenu: true, 
     disableReorder: true},
 
-  { field: 'eval', 
+  { field: 'evalCount', 
     headerName: 'NO. OF EVALUATIONS', 
     flex: 1, 
     headerAlign: 'center', 
@@ -24,15 +25,26 @@ const columns: GridColDef[] = [
     disableReorder: true},
 
   {
-    field: 'time',
+    field: 'timestamp',
     headerName: 'SUBMITTED ON',
     flex: 1,
     headerAlign: 'center',
-    align: 'center'
+    align: 'center',
+    type: 'datetime',
+    /*
+    valueFormatter: (params: GridValueFormatterParams) => {
+    // first converts to JS Date, then to locale option through date-fns
+    return formatDate(params.value);
+    },
+    // valueGetter for filtering
+    valueGetter: (params: GridValueGetterParams) => {
+    return formatDate(params.value);
+    }
+    */
   },
 
   {
-    field: 'count',
+    field: 'problemCount',
     headerName: 'ACCESSBILITY ISSUES',
     type: 'number',
     flex: 1,
@@ -41,13 +53,33 @@ const columns: GridColDef[] = [
   }
 ];
 
+
 const rows = [
 
   { id: 1, url: 'https://google.com', eval: '10', time: "8/2/2023 08:00" , count: 13 },
 
 ];
 
+
 export default function DataTable() {
+
+  
+  const [rows, setRows] = useState(() => []);
+
+  useEffect(() => {
+      fetch(
+        "https://asia-southeast1-starlit-array-328711.cloudfunctions.net/hack4good/api/assessments/visa",
+        { mode: "cors" }
+      ).then(response => {
+        return response.json();
+      }).then(data => {
+        JSON.stringify(data);
+        console.log(data);
+        setRows(() => data);
+      })  
+  }, []);
+  
+  
   return (
 
     <Box sx={{width: '80%', paddingTop: '5%'}}>
