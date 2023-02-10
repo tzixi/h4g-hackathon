@@ -24,8 +24,25 @@ interface AssesorProps {
 
 export default function NewAssessment({stateChanger, open}: AssesorProps) {
 
+  var [url, setUrl] = useState('');
   const handleClose = () => {
     stateChanger(false);
+  }
+
+  const newAssessmentPost = () => {
+    fetch("https://asia-southeast1-starlit-array-328711.cloudfunctions.net/hack4good/api/assessment/add", {
+    method: 'POST',
+    mode: 'cors',
+    body: JSON.stringify({
+      companyName: 'visa',
+      timestamp: 1676060952,
+      url: {url}, 
+      assessInfo: "im tired" 
+    })
+    },).then((response) => {
+      console.log(response);
+      stateChanger(false);
+    })
   }
   
   return (
@@ -84,6 +101,7 @@ export default function NewAssessment({stateChanger, open}: AssesorProps) {
                 variant="filled"
                 label="Enter URL here"
                 id="fullWidth"
+                onChange={(event) => {setUrl(event.target.value)}}
                 sx={{ borderRadius: "1px" }}
               />
             </Stack>
@@ -153,6 +171,7 @@ export default function NewAssessment({stateChanger, open}: AssesorProps) {
                 <Grid display={"flex"} spacing={3}>
                   <Button
                     startIcon={<AddIcon />}
+                    onClick={newAssessmentPost}
                     sx={{
                       backgroundColor: "#E0E0E0",
                       color: "#000000DE",
