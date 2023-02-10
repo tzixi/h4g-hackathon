@@ -30,19 +30,21 @@ export default function NewAssessment({stateChanger, open}: AssesorProps) {
   }
 
   const newAssessmentPost = () => {
-    fetch("https://asia-southeast1-starlit-array-328711.cloudfunctions.net/hack4good/api/assessment/add", {
-    method: 'POST',
-    mode: 'cors',
-    body: JSON.stringify({
-      companyName: 'visa',
-      timestamp: 1676060952,
-      url: {url}, 
-      assessInfo: "im tired" 
-    })
-    },).then((response) => {
-      console.log(response);
-      stateChanger(false);
-    })
+      if (url != ""){
+      fetch("https://asia-southeast1-starlit-array-328711.cloudfunctions.net/hack4good/api/assessment/add", {
+        method: 'POST',
+        mode: 'cors',
+        body: JSON.stringify({
+          companyName: 'gic',
+          timestamp: 1676060952,
+          url: {url}, 
+          assessInfo: "im tired" 
+        })
+        },).then((response) => {
+          console.log(response);
+          stateChanger(false);
+        });
+      }
   }
   
   return (
