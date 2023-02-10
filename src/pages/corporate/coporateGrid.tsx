@@ -5,7 +5,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { useState, useEffect } from 'react';
 
 const columns: GridColDef[] = [
-  { field: 'id', 
+  { field: 'index', 
     headerName: 'NO.', 
     flex: 1, 
     disableColumnMenu: true, 
@@ -54,13 +54,6 @@ const columns: GridColDef[] = [
 ];
 
 
-const rows = [
-
-  { id: 1, url: 'https://google.com', eval: '10', time: "8/2/2023 08:00" , count: 13 },
-
-];
-
-
 export default function DataTable() {
 
   
@@ -74,6 +67,9 @@ export default function DataTable() {
         return response.json();
       }).then(data => {
         JSON.stringify(data);
+        for (var i = 0; i < data.length; i++){
+          data[i].index = i + 1;
+        }
         console.log(data);
         setRows(() => data);
       })  
