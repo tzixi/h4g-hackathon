@@ -8,6 +8,7 @@ import Head from "next/head";
 import Image from 'next/image';
 import { useState } from 'react';
 import UserBar from 'components/UserBar/UserBar';
+import CollapsibleTable from '../../../components/coporateGrid';
 
 export default function Diagnostic() {
 
@@ -88,7 +89,7 @@ export default function Diagnostic() {
       <Stack spacing={10}>
     <Box display='flex' flex='1' justifyContent='space-around' height= '30vh' sx={{
         backgroundColor: '#f9f9f9', }}>
-        <DataTable/>
+        <CollapsibleTable/>
     </Box>
       <Box display='flex' flex='1' justifyContent='center' 
       sx={{backgroundColor: '##f9f9f9', paddingX: '8%'}}>
