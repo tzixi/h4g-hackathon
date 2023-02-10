@@ -1,5 +1,5 @@
 .main {
-  width: 700px;
+  width: 40%;
   height: 1000px;
   font-family: "Roboto", sans-serif;
 }
@@ -21,11 +21,16 @@
   width: 100%;
   justify-content: center;
   flex-direction: row;
-  margin: 0px 5px;
+  margin: 10px 5px;
 }
 
-.positive .negative {
+.positive {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
+}
+.negative {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

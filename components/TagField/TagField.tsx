@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import type { Property } from "csstype";
+import { Tooltip } from "@mui/material";
 
 const tagInput = {
   backgroundColor: "transparent",
@@ -16,48 +17,48 @@ const tagContainer = {
   flexWrap: "wrap" as Property.FlexWrap,
   padding: "0.5em",
   borderRadius: "3px",
-  width: "300px",
+  width: "100%",
   marginTop: "1em",
   display: "flex",
   alignItems: "center",
-  gap: "1em",
+  gap: "5px",
 };
 
 interface Props {
   onChange: (tags: string[]) => void;
+  defaultTags: string[];
+  isPositive: boolean;
 }
 
-const TagField = (props: { tags: string[]; isPositive: boolean }) => {
-  const [tags, setTags] = useState(props.tags);
-
-  //   useEffect(() => {
-  //     onChange(tags);
-  //   }, [tags, onChange]);
-
-  const handleKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
-    const target = e.target as HTMLInputElement;
-    if (e.code === "Enter") {
-      setTags((tags) => [...tags, target.value]);
-      target.value = "";
-    }
-    if (e.code === "Backspace" && target.value === "") {
-      setTags((tags) => tags.slice(0, -1));
-    }
-    if (!e.key.trim()) return;
-  };
-
-  const removeTag = (index: number) => {
-    setTags((tags) => [...tags.slice(0, index), ...tags.slice(index + 1)]);
-  };
+const TagField = ({ onChange, defaultTags, isPositive }: Props) => {
+  const [tags, setTags] = useState(defaultTags);
+  const [selectedTags, setSelectedTags] = useState([] as string[]);
+  useEffect(() => {
+    onChange(selectedTags);
+  }, [selectedTags]);
   return (
     <div style={tagContainer}>
       {tags.map((tags, index) => (
         <div
+          title="asdasdasasdasd"
+          onClick={() => {
+            if (!selectedTags.includes(tags)) {
+              setSelectedTags(() => [...selectedTags, tags]);
+            } else {
+              setSelectedTags(selectedTags.filter((tag) => tag !== tags));
+            }
+            return;
+          }}
           style={{
-            backgroundColor: props.isPositive ? "#21A25C" : "#E23737",
+            backgroundColor: isPositive ? "#21A25C" : "#E23737",
+            filter: selectedTags.includes(tags) ? "brightness(1.1)" : "",
             display: "inline-block",
-            padding: "0.5em 0.75em",
+            padding: "0.3em 0.5em",
+            border: selectedTags.includes(tags)
+              ? "5px solid #17475F"
+              : "5px solid transparent",
             borderRadius: "20px",
+            cursor: "pointer",
           }}
           key={index}
         >
@@ -69,17 +70,6 @@ const TagField = (props: { tags: string[]; isPositive: boolean }) => {
           </span>
         </div>
       ))}
-      <input
-        onKeyDown={handleKeyDown}
-        disabled={tags.length >= 6}
-        type="text"
-        style={tagInput}
-        placeholder={
-          tags.length >= 6
-            ? ""
-            : "Include up to " + (6 - { tags }.tags.length) + " tag(s)"
-        }
-      />
     </div>
   );
 };
