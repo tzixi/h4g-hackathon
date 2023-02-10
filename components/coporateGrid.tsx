@@ -48,6 +48,8 @@ function Row(props: { row: ReturnType<typeof createData> }) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
 
+  var fontCol = (row.problemCount) == 0 ? "green" : ((row.problemCount >= 10) ? "red" : "orange")
+
   return (
     <React.Fragment>
       <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
@@ -65,7 +67,10 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         </TableCell>
         <TableCell align="center">{row.evalCount}</TableCell>
         <TableCell align="center">{row.time}</TableCell>
-        <TableCell align="center">{row.problemCount}</TableCell>
+        <TableCell align="center" 
+        style={{color: fontCol}}>
+        {row.problemCount}
+        </TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -105,7 +110,11 @@ function Row(props: { row: ReturnType<typeof createData> }) {
   );
 }
 
-export default function CollapsibleTable() {
+interface GridProps {
+  stateChanger: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+export default function CollapsibleTable({stateChanger}: GridProps) {
   var [rows, setRows] = React.useState([])
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -161,7 +170,10 @@ export default function CollapsibleTable() {
       width: '202px', height: '50px', fontSize: '15px', alignSelf: 'right'}} 
         disableFocusRipple
         disableRipple
-        startIcon={<AddIcon/>}>
+        startIcon={<AddIcon/>}
+        onClick = {() => {
+          stateChanger(true);
+        }}>
             NEW ASSESSMENT
         </Button>
     <TableContainer component={Paper}>
@@ -170,9 +182,9 @@ export default function CollapsibleTable() {
           <TableRow>
             <TableCell />
             <TableCell>WEBSITE URL</TableCell>
-            <TableCell align="right">NO. OF EVALUATIONS</TableCell>
-            <TableCell align="right">SUBMITTED ON</TableCell>
-            <TableCell align="right">ACCESSIBILITY ISSUES</TableCell>
+            <TableCell align="center">NO. OF EVALUATIONS</TableCell>
+            <TableCell align="center">SUBMITTED ON</TableCell>
+            <TableCell align="center">ACCESSIBILITY ISSUES</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
