@@ -15,9 +15,22 @@ import {
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import CloseIcon from "@mui/icons-material/Close";
+import { useState } from "react";
 
-export default function NewAssessment() {
+interface AssesorProps {
+  stateChanger: React.Dispatch<React.SetStateAction<boolean>>,
+  open: boolean,
+}
+
+export default function NewAssessment({stateChanger, open}: AssesorProps) {
+
+  const handleClose = () => {
+    stateChanger(false);
+  }
+  
   return (
+    <Modal open={open}
+      onClose={handleClose}>
     <Box
       sx={{
         position: "absolute" as "absolute",
@@ -33,7 +46,7 @@ export default function NewAssessment() {
       }}
     >
       <IconButton>
-        <CloseIcon />
+        <CloseIcon onClick={() => {stateChanger(false)}} />
       </IconButton>
       <Box
         sx={{
@@ -125,7 +138,7 @@ export default function NewAssessment() {
                   <Typography
                     id="modal-modal-description"
                     variant="body1"
-                    sx={{ mt: 1.5, color: "black" }}
+                    sx={{ mt: 4.1, color: "black" }}
                   >
                     Select All
                   </Typography>
@@ -157,5 +170,6 @@ export default function NewAssessment() {
         </List>
       </Box>
     </Box>
+    </Modal>
   );
 }

@@ -2,17 +2,20 @@ import * as React from 'react';
 import { Box, Stack, Typography, Button, Modal, IconButton, Grid, CircularProgress, TextField } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
-import DataTable from './coporateGrid'
-import Header from './header';
+import DataTable from '../../../components/coporateGrid'
+import Header from '../../../components/header';
 import Head from "next/head";
 import Image from 'next/image';
 import { useState } from 'react';
 import UserBar from 'components/UserBar/UserBar';
+import CollapsibleTable from '../../../components/coporateGrid';
+import NewAssessment from 'components/NewAssessment/assessment';
 
 export default function Diagnostic() {
 
   const [isLoading, setIsLoading] = useState(false);
   const [open, setOpen] = useState(false);
+  const [open1, setOpen1] = useState(false);
   const [url, setUrl] = useState('');
   const [number, setNumber] = useState(0);
   var [count1, setCount1] = useState(0);
@@ -88,7 +91,7 @@ export default function Diagnostic() {
       <Stack spacing={10}>
     <Box display='flex' flex='1' justifyContent='space-around' height= '30vh' sx={{
         backgroundColor: '#f9f9f9', }}>
-        <DataTable/>
+        <CollapsibleTable stateChanger={setOpen1}/>
     </Box>
       <Box display='flex' flex='1' justifyContent='center' 
       sx={{backgroundColor: '##f9f9f9', paddingX: '8%'}}>
@@ -173,7 +176,7 @@ export default function Diagnostic() {
                     <Typography id="modal-modal-description"
                        variant='h6' 
                        sx={{ mt: 2, color: 'black', paddingTop: '3%' }}>
-                        <Typography sx={{color: 'green',}} variant='h4'>{count1}</Typography> of them is minor
+                        <Typography sx={{color: 'green',}} variant='h4'>{count1}</Typography> of them are minor
                     </Typography>
                   </Grid>
                   <Grid item xs={4} md={4} lg={4}>
@@ -181,12 +184,12 @@ export default function Diagnostic() {
                       id="modal-modal-description" 
                       variant='h6' 
                       sx={{ mt: 2, color: 'black', paddingTop: '3%' }}>
-                        <Typography sx={{color: 'orange',}} variant='h4'>{count2}</Typography> of them is moderate
+                        <Typography sx={{color: 'orange',}} variant='h4'>{count2}</Typography> of them are moderate
                     </Typography>
                   </Grid>
                   <Grid item xs={4} md={4} lg={4}>
                     <Typography id="modal-modal-description" variant='h6' sx={{ mt: 2, color: 'black', paddingTop: '3%' }}>
-                    <Typography sx={{color: 'red',}} variant='h4'>{count3}</Typography> of them is serious
+                    <Typography sx={{color: 'red',}} variant='h4'>{count3}</Typography> of them are serious
                     </Typography>
                   </Grid>
               
@@ -208,7 +211,11 @@ export default function Diagnostic() {
                       color: "#000000DE", 
                       borderRadius: "15px", 
                       marginBottom: '2%', 
-                      gap: '10px'}}>
+                      gap: '10px'}}
+                      onClick = {() => {
+                        setOpen1(true);
+                        setOpen(false);
+                      }}>
                         New Assesment
                     </Button>
                 </Grid>
@@ -218,7 +225,9 @@ export default function Diagnostic() {
           </Grid>
           </Box>}
         </Box>
-      </Modal> 
+      </Modal>
+
+      <NewAssessment open={open1} stateChanger={setOpen1}/> 
     </Box>
   );
 }
