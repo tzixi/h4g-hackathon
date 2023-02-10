@@ -36,11 +36,14 @@ const TagField = ({ onChange, defaultTags, isPositive }: Props) => {
   useEffect(() => {
     onChange(selectedTags);
   }, [selectedTags]);
+
+  useEffect(() => {
+    setTags(defaultTags);
+  }, [defaultTags]);
   return (
     <div style={tagContainer}>
       {tags.map((tags, index) => (
         <div
-          title="asdasdasasdasd"
           onClick={() => {
             if (!selectedTags.includes(tags)) {
               setSelectedTags(() => [...selectedTags, tags]);

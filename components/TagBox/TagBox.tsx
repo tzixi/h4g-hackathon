@@ -2,6 +2,7 @@ import { Fab, TextField } from "@mui/material";
 import TagField from "components/TagField/TagField";
 import styles from "./TagBox.module.css";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { use, useEffect, useState } from "react";
 
 const BannerText = [
@@ -95,13 +96,30 @@ const NTags = [
   ],
 ];
 
-const TagBox = (props: { stage: number }) => {
+const TagBox = (props: {
+  setResult: any;
+  resultArr: string[][];
+  stage: number;
+  forward: any;
+  back: any;
+}) => {
   const [selectedTags, setSelectedTags] = useState([] as string[]);
+  const [currStage, setStage] = useState(0);
   const [NTagsArr, setNTags] = useState([] as string[]);
   const [PTagsArr, setPTags] = useState([] as string[]);
   useEffect(() => {
     setSelectedTags(() => [...PTagsArr, ...NTagsArr]);
   }, [PTagsArr, NTagsArr]);
+
+  useEffect(() => {
+    props.setResult(selectedTags);
+    props.resultArr[currStage] = selectedTags;
+  }, [selectedTags]);
+
+  useEffect(() => {
+    let emptyArr = [] as string[];
+    setSelectedTags(emptyArr);
+  }, [currStage]);
 
   const handlePTagChange = (tags: string[]) => {
     setPTags(tags);
@@ -109,24 +127,66 @@ const TagBox = (props: { stage: number }) => {
   const handleNTagChange = (tags: string[]) => {
     setNTags(tags);
   };
+
+  const handleForward = () => {
+    setStage(currStage + 1);
+    props.forward();
+  };
+
+  const handleBack = () => {
+    setStage(currStage - 1);
+    props.back();
+  };
+
+  const handleSubmit = () => {
+    console.log(props.resultArr);
+  };
+
   return (
     <div className={styles.main}>
       <div className={styles.banner}>
-        <div>
-          <h2>{BannerText[props.stage] + ":"}</h2>
-          <p>{BannerDesc[props.stage]}</p>
+        {currStage === 0 ? (
+          ""
+        ) : (
+          <Fab
+            sx={{ alignContent: "center" }}
+            variant="extended"
+            onClick={handleBack}
+          >
+            <ArrowBackIosIcon />
+            BACK
+          </Fab>
+        )}
+        <div style={{ margin: "0px 20px" }}>
+          <h2>{BannerText[currStage] + ":"}</h2>
+          <p>{BannerDesc[currStage]}</p>
         </div>
-        <Fab sx={{ alignContent: "center" }} variant="extended">
-          NEXT
-          <ArrowForwardIosIcon />
-        </Fab>
+        {currStage === 3 ? (
+          <Fab
+            sx={{ alignContent: "center", padding: "0px 10px" }}
+            variant="extended"
+            onClick={handleSubmit}
+          >
+            SUBMIT
+            <ArrowForwardIosIcon />
+          </Fab>
+        ) : (
+          <Fab
+            sx={{ alignContent: "center" }}
+            variant="extended"
+            onClick={handleForward}
+          >
+            NEXT
+            <ArrowForwardIosIcon />
+          </Fab>
+        )}
       </div>
       <div className={styles.tagtray}>
         <div className={styles.positive}>
           <h2>Positive</h2>
           <TagField
             onChange={handlePTagChange}
-            defaultTags={PTags[props.stage]}
+            defaultTags={PTags[currStage]}
             isPositive
           />
         </div>
@@ -134,7 +194,7 @@ const TagBox = (props: { stage: number }) => {
           <h2>Negative</h2>
           <TagField
             onChange={handleNTagChange}
-            defaultTags={NTags[props.stage]}
+            defaultTags={NTags[currStage]}
             isPositive={false}
           />
         </div>
@@ -157,7 +217,7 @@ const TagBox = (props: { stage: number }) => {
       ></hr>
       <div className={styles.combinedtray}></div>
       <div className={styles.remarkbox}>
-        <h2>Additional Remarks:</h2>
+        <h2 style={{ color: "black" }}>Additional Remarks:</h2>
         <TextField
           placeholder="Enter Remarks here"
           sx={{ width: "100%" }}
