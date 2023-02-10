@@ -129,7 +129,7 @@ export default function CollapsibleTable({stateChanger}: GridProps) {
       JSON.stringify(data);
       for (var i = 0; i < data.length; i++){
         data[i].index = i + 1;
-        data[i].time = new Date(parseInt(data[i].timestamp)).toLocaleString();
+        data[i].time = new Date(parseInt(data[i].timestamp) * 1000).toLocaleString();
         data[i].info = [
           {
             name: 'jon doe',
