@@ -41,19 +41,15 @@ export default function Diagnostic() {
         const number = Object.keys(data.result.violations).length
         const problems = data.result.violations
         setNumber(number);
-        console.log(data.result.violations);
 
         for (var i = 0; i < problems.length; i++) {
           console.log(problems[i].impact);
           if (problems[i].impact == "minor"){
             setCount1(++count1);
-            console.log("count1: " + count1);
           } else if (problems[i].impact == "moderate"){
             setCount2(++count2);
-            console.log("count2: " + count2);
           } else{
             setCount3(++count3)
-            console.log("count3: " + count3);
           }
         }
       })
