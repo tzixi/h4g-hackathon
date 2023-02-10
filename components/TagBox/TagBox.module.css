@@ -1,0 +1,36 @@
+.main {
+  width: 40%;
+  height: 1000px;
+  font-family: "Roboto", sans-serif;
+}
+
+.banner {
+  display: flex;
+  flex-direction: row;
+  background-color: #17475f;
+  align-items: center;
+  padding: 10px;
+  color: white;
+  border-radius: 15px;
+  justify-content: space-between;
+  height: 140px;
+}
+
+.tagtray {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  flex-direction: row;
+  margin: 10px 5px;
+}
+
+.positive {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.negative {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
