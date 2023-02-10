@@ -8,11 +8,26 @@ import cx from "classnames";
 import Image from "next/image";
 import logo from "../../public/inclusion_lab_photo.png";
 import { Router, useRouter } from "next/router";
+import { useEffect } from "react";
 
 interface Props {}
 
 const Home: NextPage = (props): JSX.Element => {
   const Router = useRouter();
+
+  const fetchThing = async () => {
+    const response = await fetch(
+      "https://asia-southeast1-starlit-array-328711.cloudfunctions.net/hack4good/api/assessments/twilio",
+      { mode: "cors" }
+    );
+    const data = await response.json();
+    console.log(data);
+  };
+
+  useEffect(() => {
+    fetchThing();
+  }, []);
+
   return (
     <>
       <Head>
