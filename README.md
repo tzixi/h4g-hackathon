@@ -19,13 +19,13 @@ The Corporations refer to companies keen on improving the accessibility and incl
 https://docs.google.com/presentation/d/1K3HpKcbNAiW8EnD295R0frCV5i0T0JFR8OszeE--I-I/edit?usp=sharing
 
 ## Features:
-1. Firebase Auth (User Login, split users into Corporate Login and Assessor Login)
-2. Corporate Page and Dashboard
-3. New Assessment Form
-4. Assessor Page and Dashboard
-5. Assessor Evaluation Form
-6. API Integration (Automatic updates with new forms submitted)
-
+1. Corporate Page and Dashboard
+2. New Assessment Form
+3. Assessor Page and Dashboard
+4. Assessor Evaluation Form
+5. API Integration (Automatic updates with new forms submitted)
+6. User management (not implemented)
+7. Auto web assessibility testing tool (Powered using Axe-Core)
 ## Design (Figma)
 https://www.figma.com/file/HzpAeG5Q0AyqRLMYiA8VTn/Hack4Good-InclusionLabs-Design?node-id=0%3A1&t=E8hDip78uk38haEC-1
 
