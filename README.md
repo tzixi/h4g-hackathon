@@ -26,6 +26,12 @@ https://docs.google.com/presentation/d/1K3HpKcbNAiW8EnD295R0frCV5i0T0JFR8OszeE--
 5. Assessor Evaluation Form
 6. API Integration (Automatic updates with new forms submitted)
 
+## Screenshots
+![image](https://user-images.githubusercontent.com/7589432/218238576-e2cf488d-f3ae-44c0-b7a9-4ea2c60c5fc1.png)
+![image](https://user-images.githubusercontent.com/7589432/218238608-a475b6c8-3411-4dbc-afbf-dec57fa34399.png)
+![image](https://user-images.githubusercontent.com/7589432/218238612-98308874-3dbe-40ef-8594-1e139c2c1780.png)
+
+
 ## Project Contributors:
 - Poh Wei Pin (@firwer)
 - Irving Alexander de Boer (@irving11119)
