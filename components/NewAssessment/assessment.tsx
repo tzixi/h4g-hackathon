@@ -17,6 +17,7 @@ import AddIcon from "@mui/icons-material/Add";
 import CloseIcon from "@mui/icons-material/Close";
 import { useState } from "react";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 interface AssesorProps {
   stateChanger: React.Dispatch<React.SetStateAction<boolean>>;
@@ -27,7 +28,7 @@ export default function NewAssessment({ stateChanger, open }: AssesorProps) {
   var [assessInfo, setAssessInfo] = useState("");
   var [companyName, setCompanyName] = useState("");
   var [url, setUrl] = useState("");
-
+  const router = useRouter();
   const handleClose = () => {
     stateChanger(false);
   };
@@ -49,6 +50,7 @@ export default function NewAssessment({ stateChanger, open }: AssesorProps) {
         config
       );
     }
+    stateChanger(false);
   };
 
   return (
