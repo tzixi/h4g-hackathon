@@ -155,7 +155,7 @@ export default function CollapsibleTable({ stateChanger }: GridProps) {
 
   React.useEffect(() => {
     fetch(
-      "https://asia-southeast1-starlit-array-328711.cloudfunctions.net/hack4good/api/assessments/visa",
+      "https://asia-southeast1-starlit-array-328711.cloudfunctions.net/hack4good/api/assessments/NUS",
       { mode: "cors" }
     )
       .then((response) => {

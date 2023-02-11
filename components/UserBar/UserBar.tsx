@@ -37,7 +37,7 @@ const UserBar = (props: {
               props.url.toUpperCase()
             : props.isAssessor
             ? "ASSESSOR DASHBOARD - TAN AH GOW"
-            : "CORPORATE DASHBOARD - VISA"}
+            : "CORPORATE DASHBOARD - NUS"}
         </p>
       </div>
       <div className={styles.user}>
