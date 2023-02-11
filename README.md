@@ -15,6 +15,9 @@ The Asessors will be people with mild-minor disabilities. These assessors will l
 
 The Corporations refer to companies keen on improving the accessibility and inclusivity of their websites. These assessors will look out for presence of accessibility features/tools, adjustable text size and high-contrast mode, clear and simple language)
 
+## Slide deck:
+https://docs.google.com/presentation/d/1K3HpKcbNAiW8EnD295R0frCV5i0T0JFR8OszeE--I-I/edit?usp=sharing
+
 ## Features:
 1. Firebase Auth (User Login, split users into Corporate Login and Assessor Login)
 2. Corporate Page and Dashboard
