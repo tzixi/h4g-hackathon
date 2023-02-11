@@ -16,6 +16,7 @@ import {
 import AddIcon from "@mui/icons-material/Add";
 import CloseIcon from "@mui/icons-material/Close";
 import { useState } from "react";
+import axios from "axios";
 
 interface AssesorProps {
   stateChanger: React.Dispatch<React.SetStateAction<boolean>>;
@@ -26,28 +27,27 @@ export default function NewAssessment({ stateChanger, open }: AssesorProps) {
   var [assessInfo, setAssessInfo] = useState("");
   var [companyName, setCompanyName] = useState("");
   var [url, setUrl] = useState("");
+
   const handleClose = () => {
     stateChanger(false);
   };
-
-  const newAssessmentPost = () => {
+  const newAssessmentPost = async () => {
     if (url != "") {
-      fetch(
+      const config = {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      };
+      const response = await axios.post(
         "https://asia-southeast1-starlit-array-328711.cloudfunctions.net/hack4good/api/assessment/add",
         {
-          method: "POST",
-          mode: "cors",
-          body: JSON.stringify({
-            companyName: { companyName },
-            timestamp: 1676060952,
-            url: { url },
-            assessInfo: { assessInfo },
-          }),
-        }
-      ).then((response) => {
-        console.log(response);
-        stateChanger(false);
-      });
+          companyName: companyName,
+          timestamp: Date.now(),
+          url: url,
+          assessInfo: assessInfo,
+        },
+        config
+      );
     }
   };
 

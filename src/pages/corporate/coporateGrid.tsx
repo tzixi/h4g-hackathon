@@ -66,7 +66,6 @@ const columns: GridColDef[] = [
 
 export default function DataTable() {
   const [rows, setRows] = useState(() => []);
-
   useEffect(() => {
     fetch(
       "https://asia-southeast1-starlit-array-328711.cloudfunctions.net/hack4good/api/assessments/NUS",
