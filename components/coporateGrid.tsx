@@ -56,7 +56,7 @@ const dataInfo = [
 function Row(props: { row: ReturnType<typeof createData> }) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
-  const [response, setResponse] = React.useState([]);
+  const [response, setResponse] = React.useState([] as any[]);
 
   var fontCol =
     row.problemCount == 0 ? "green" : row.problemCount >= 10 ? "red" : "orange";
@@ -149,9 +149,10 @@ function Row(props: { row: ReturnType<typeof createData> }) {
 
 interface GridProps {
   stateChanger: React.Dispatch<React.SetStateAction<boolean>>;
+  open1: boolean;
 }
 
-export default function CollapsibleTable({ stateChanger }: GridProps) {
+export default function CollapsibleTable({ stateChanger, open1 }: GridProps) {
   var [rows, setRows] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -177,7 +178,7 @@ export default function CollapsibleTable({ stateChanger }: GridProps) {
 
         setRows(() => data);
       });
-  }, []);
+  }, [open1]);
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);

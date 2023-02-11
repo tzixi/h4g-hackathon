@@ -22,11 +22,15 @@ import { useRouter } from "next/router";
 interface AssesorProps {
   stateChanger: React.Dispatch<React.SetStateAction<boolean>>;
   open: boolean;
+  companyName: string;
 }
 
-export default function NewAssessment({ stateChanger, open }: AssesorProps) {
+export default function NewAssessment({
+  stateChanger,
+  open,
+  companyName,
+}: AssesorProps) {
   var [assessInfo, setAssessInfo] = useState("");
-  var [companyName, setCompanyName] = useState("");
   var [url, setUrl] = useState("");
   const router = useRouter();
   const handleClose = () => {
@@ -43,7 +47,7 @@ export default function NewAssessment({ stateChanger, open }: AssesorProps) {
         "https://asia-southeast1-starlit-array-328711.cloudfunctions.net/hack4good/api/assessment/add",
         {
           companyName: companyName,
-          timestamp: Date.now(),
+          timestamp: Math.floor(Date.now() / 1000),
           url: url,
           assessInfo: assessInfo,
         },
@@ -132,7 +136,7 @@ export default function NewAssessment({ stateChanger, open }: AssesorProps) {
                 >
                   Name:
                 </Typography>
-                <TextField
+                {/* <TextField
                   fullWidth
                   variant="filled"
                   label="Enter Company Name"
@@ -141,7 +145,7 @@ export default function NewAssessment({ stateChanger, open }: AssesorProps) {
                     setCompanyName(event.target.value);
                   }}
                   sx={{ borderRadius: "1px" }}
-                />
+                /> */}
               </Stack>
               <Typography
                 id="modal-modal-description"
@@ -193,7 +197,7 @@ export default function NewAssessment({ stateChanger, open }: AssesorProps) {
                   <Typography
                     id="modal-modal-description"
                     variant="body1"
-                    sx={{ mt: 1.6, color: "black" }}
+                    sx={{ mt: 4.4, color: "black" }}
                   >
                     Select All
                   </Typography>
