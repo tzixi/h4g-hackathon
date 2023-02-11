@@ -34,6 +34,10 @@ https://www.figma.com/file/HzpAeG5Q0AyqRLMYiA8VTn/Hack4Good-InclusionLabs-Design
 ![image](https://user-images.githubusercontent.com/7589432/218238608-a475b6c8-3411-4dbc-afbf-dec57fa34399.png)
 ![image](https://user-images.githubusercontent.com/7589432/218238612-98308874-3dbe-40ef-8594-1e139c2c1780.png)
 
+## How to Setup:
+1. Clone repo to your computer
+2. In the terminal, run yarn dev
+3. Go to localhost:3000/ on your browser once server is up
 
 ## Project Contributors:
 - Poh Wei Pin (@firwer)
