@@ -124,7 +124,7 @@ function assessorEvaluation() {
       </div>
 
       <div className={cx(styles["evaluation-form"])}>
-        <UserBar isAssessor />
+        <UserBar isAssessor assessMode url={url} companyName={companyName} />
         <div className={styles.maincontent}>
           <div
             style={{

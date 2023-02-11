@@ -20,7 +20,7 @@ function Home() {
       >
         <Image src="/InclusionLabLogo.png" alt="me" width="500" height="118" />
       </div>
-      <UserBar isAssessor />
+      <UserBar isAssessor assessMode={false} url="" companyName="" />
       <div style={{ backgroundColor: "#f9f9f9" }}>
         <div className={styles.left}>
           <p style={{ fontSize: "20px", fontWeight: "700" }}>

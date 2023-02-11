@@ -87,7 +87,7 @@ export default function Diagnostic() {
       >
         <Image src="/InclusionLabLogo.png" alt="me" width="500" height="118" />
       </div>
-      <UserBar isAssessor={false}/>
+      <UserBar isAssessor={false} assessMode={false} url="" companyName=""/>
       <Stack spacing={10}>
     <Box display='flex' flex='1' justifyContent='space-around' height= '30vh' sx={{
         backgroundColor: '#f9f9f9', }}>

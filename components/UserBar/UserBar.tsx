@@ -4,7 +4,12 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
-const UserBar = (props: { isAssessor: boolean }) => {
+const UserBar = (props: {
+  isAssessor: boolean;
+  assessMode: boolean;
+  companyName: string;
+  url: string;
+}) => {
   const router = useRouter();
   const { asPath } = useRouter();
   const handleLogout = () => {
@@ -25,7 +30,12 @@ const UserBar = (props: { isAssessor: boolean }) => {
           <div></div>
         )}
         <p style={{ fontSize: "20px", fontWeight: "700" }}>
-          {props.isAssessor
+          {props.assessMode
+            ? "YOU ARE ASSESSING: " +
+              props.companyName.toUpperCase() +
+              " - " +
+              props.url.toUpperCase()
+            : props.isAssessor
             ? "ASSESSOR DASHBOARD - TAN AH GOW"
             : "CORPORATE DASHBOARD - TAN AH GOW"}
         </p>
