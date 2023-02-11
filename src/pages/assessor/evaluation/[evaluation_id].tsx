@@ -6,12 +6,40 @@ import cx from "classnames";
 import styles from "./evaluation.module.css";
 import Fab from "@mui/material/Fab";
 import TagBox from "components/TagBox/TagBox";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
+import { useRouter } from "next/router";
+import { Alert, AlertTitle, Button, Dialog, DialogTitle } from "@mui/material";
 function assessorEvaluation() {
   const [currStage, setStage] = useState(0);
   const [stageArr, setStageArr] = useState([[], [], [], []] as string[][]);
   const [remarks, setRemarks] = useState(["", "", "", ""]);
+  const [companyName, setCompanyName] = useState("");
+  const [assessInfo, setAssessInfo] = useState("");
+  const [url, setUrl] = useState("");
+  const [open, setOpen] = useState(false);
+  const router = useRouter();
+
+  const handleGetData = async () => {
+    const { evaluation_id } = router.query;
+    console.log(evaluation_id);
+    await axios
+      .get(`http://localhost:8080/api/assessment/${evaluation_id}`)
+      .then(function (response) {
+        const result = response.data;
+        setCompanyName(result.companyName);
+        setAssessInfo(result.assessInfo);
+        setUrl(result.url);
+        console.log(companyName);
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
+  };
+
+  useEffect(() => {
+    handleGetData();
+  }, []);
 
   const handleResult = (result: string[]) => {
     setStageArr((prev) => {
@@ -48,20 +76,39 @@ function assessorEvaluation() {
       const response = await axios.post(
         "https://asia-southeast1-starlit-array-328711.cloudfunctions.net/hack4good/api/assessment/result/add",
         {
-          url: "https://twilio.com",
+          url: url,
           disability: "Dyslexia and Epilepsy",
           evalTags: JSON.stringify(stageArr),
           evalRemarks: JSON.stringify(remarks),
         },
         config
       );
-      return response.data;
+      setOpen(true);
     } catch (error) {
       console.error(error);
     }
   };
   return (
     <div style={{ width: "100%", padding: "10px" }}>
+      <Dialog
+        onClose={() => {
+          setOpen(false);
+        }}
+        open={open}
+      >
+        <DialogTitle>
+          Submitted Successfully! Thank you for your assessment!
+        </DialogTitle>
+        <Button
+          variant="outlined"
+          onClick={() => {
+            setOpen(false);
+            router.back();
+          }}
+        >
+          Return to Dashboard
+        </Button>
+      </Dialog>
       <Head>
         <title>Assessor Evaluation Page</title>
       </Head>
@@ -89,7 +136,11 @@ function assessorEvaluation() {
             }}
           >
             <h3>ASSESSMENT INFORMATION:</h3>
-            <textarea style={{ height: "400px", width: "100%" }}></textarea>
+            <textarea
+              readOnly
+              style={{ height: "400px", width: "100%" }}
+              defaultValue={assessInfo}
+            />
             <Fab
               sx={{
                 backgroundColor: "#17475f",
@@ -103,7 +154,7 @@ function assessorEvaluation() {
               aria-label="visit-website"
               variant="extended"
               onClick={() => {
-                console.log("go to website!!!");
+                window.open(url, "_blank");
               }}
             >
               VISIT WEBSITE
