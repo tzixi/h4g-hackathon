@@ -1,80 +1,95 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Collapse from '@mui/material/Collapse';
-import IconButton from '@mui/material/IconButton';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Typography from '@mui/material/Typography';
-import Paper from '@mui/material/Paper';
-import { Button, Link, TablePagination } from '@mui/material';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import AddIcon from '@mui/icons-material/Add';
-  
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Collapse from "@mui/material/Collapse";
+import IconButton from "@mui/material/IconButton";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Typography from "@mui/material/Typography";
+import Paper from "@mui/material/Paper";
+import { Button, Link, TablePagination } from "@mui/material";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import AddIcon from "@mui/icons-material/Add";
+import axios from "axios";
 
 function createData(
+  id: string,
   index: number,
   url: string,
   evalCount: number,
   time: string,
-  problemCount: number,
+  problemCount: number
 ) {
   return {
+    id,
     index,
     url,
     evalCount,
     time,
     problemCount,
-    info: [
-      {name: "",
-      disability: "",
-      feedback: ""}
-    ],
+    info: [{ name: "", disability: "", feedback: "" }],
   };
 }
 
 const dataInfo = [
   {
-    name: 'Tan Ah Gow',
-    disability: 'Hearing Impaired',
-    feedback: '-',
+    name: "Tan Ah Gow",
+    disability: "Hearing Impaired",
+    feedback: "-",
   },
   {
-    name: 'Tan Ah Meng',
-    disability: 'Colour Blind',
-    feedback: '-',
+    name: "Tan Ah Meng",
+    disability: "Colour Blind",
+    feedback: "-",
   },
   {
     name: "John Doe",
-    disability: 'Visual Impairments',
-    feedback: '-'
+    disability: "Visual Impairments",
+    feedback: "-",
   },
-  
-]
+];
 
 function Row(props: { row: ReturnType<typeof createData> }) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
+  const [evalTags, setEvalTags] = React.useState();
+  const [evalRemarks, setEvalRemarks] = React.useState();
+  const [disability, setDisability] = React.useState("");
 
-  var fontCol = (row.problemCount) == 0 ? "green" : ((row.problemCount >= 10) ? "red" : "orange")
+  var fontCol =
+    row.problemCount == 0 ? "green" : row.problemCount >= 10 ? "red" : "orange";
 
   const handleLinkClick = () => {
-    alert("SHOW FEEDBACK")
-  }
+    alert("SHOW FEEDBACK");
+  };
 
+  const handledata = async () => {
+    try {
+      const response = await axios.get(
+        `https://asia-southeast1-starlit-array-328711.cloudfunctions.net/hack4good/api/assessment/result/${row.id}`
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <React.Fragment>
-      <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
+      <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
         <TableCell>
           <IconButton
             aria-label="expand row"
             size="small"
-            onClick={() => setOpen(!open)}
+            onClick={() => {
+              console.log(row.id);
+              handledata();
+              setOpen(!open);
+            }}
           >
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
@@ -84,9 +99,8 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         </TableCell>
         <TableCell align="center">{row.evalCount}</TableCell>
         <TableCell align="center">{row.time}</TableCell>
-        <TableCell align="center" 
-        style={{color: fontCol}}>
-        {row.problemCount}
+        <TableCell align="center" style={{ color: fontCol }}>
+          {row.problemCount}
         </TableCell>
       </TableRow>
       <TableRow>
@@ -114,11 +128,9 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                       <TableCell align="center">{infoRow.disability}</TableCell>
                       <TableCell align="center">{infoRow.feedback}</TableCell>
                       <TableCell align="center">
-                      <Button>
-                        <Link onClick={handleLinkClick}>
-                          SHOW
-                        </Link>
-                        </Button> 
+                        <Button>
+                          <Link onClick={handleLinkClick}>SHOW</Link>
+                        </Button>
                       </TableCell>
                     </TableRow>
                   ))}
@@ -133,11 +145,11 @@ function Row(props: { row: ReturnType<typeof createData> }) {
 }
 
 interface GridProps {
-  stateChanger: React.Dispatch<React.SetStateAction<boolean>>
+  stateChanger: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function CollapsibleTable({stateChanger}: GridProps) {
-  var [rows, setRows] = React.useState([])
+export default function CollapsibleTable({ stateChanger }: GridProps) {
+  var [rows, setRows] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -145,65 +157,78 @@ export default function CollapsibleTable({stateChanger}: GridProps) {
     fetch(
       "https://asia-southeast1-starlit-array-328711.cloudfunctions.net/hack4good/api/assessments/visa",
       { mode: "cors" }
-    ).then(response => {
-      return response.json();
-    }).then(data => {
-      JSON.stringify(data);
-      for (var i = 0; i < data.length; i++){
-        data[i].index = i + 1;
-        data[i].time = new Date(parseInt(data[i].timestamp) * 1000).toLocaleString();
-        data[i].info = dataInfo;
-      }
-      
-      setRows(() => data);
-    })  
-}, []);
+    )
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        JSON.stringify(data);
+        for (var i = 0; i < data.length; i++) {
+          data[i].index = i + 1;
+          data[i].time = new Date(
+            parseInt(data[i].timestamp) * 1000
+          ).toLocaleString();
+          data[i].info = dataInfo;
+        }
 
-    const handleChangePage = (event: unknown, newPage: number) => {
-      setPage(newPage);
-    };
+        setRows(() => data);
+      });
+  }, []);
 
-    const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
-      setRowsPerPage(+event.target.value);
-      setPage(0);
-    };
+  const handleChangePage = (event: unknown, newPage: number) => {
+    setPage(newPage);
+  };
 
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
 
   return (
-    <Box sx={{width: '80%', paddingTop: '5%'}}>
-      <Button sx={{backgroundColor: "#E0E0E0", 
-      color: "#000000DE", 
-      borderRadius: "64px", 
-      marginBottom: '2%', 
-      gap: '10px', 
-      width: '202px', height: '50px', fontSize: '15px', alignSelf: 'right'}} 
+    <Box sx={{ width: "80%", paddingTop: "5%" }}>
+      <Button
+        sx={{
+          backgroundColor: "#E0E0E0",
+          color: "#000000DE",
+          borderRadius: "64px",
+          marginBottom: "2%",
+          gap: "10px",
+          width: "202px",
+          height: "50px",
+          fontSize: "15px",
+          alignSelf: "right",
+        }}
         disableFocusRipple
         disableRipple
-        startIcon={<AddIcon/>}
-        onClick = {() => {
+        startIcon={<AddIcon />}
+        onClick={() => {
           stateChanger(true);
-        }}>
-            NEW ASSESSMENT
-        </Button>
-    <TableContainer component={Paper}>
-      <Table aria-label="collapsible table">
-        <TableHead>
-          <TableRow>
-            <TableCell />
-            <TableCell>WEBSITE URL</TableCell>
-            <TableCell align="center">NO. OF EVALUATIONS</TableCell>
-            <TableCell align="center">SUBMITTED ON</TableCell>
-            <TableCell align="center">ACCESSIBILITY ISSUES</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <Row key={row.index} row={row} />
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-    <TablePagination
+        }}
+      >
+        NEW ASSESSMENT
+      </Button>
+      <TableContainer component={Paper}>
+        <Table aria-label="collapsible table">
+          <TableHead>
+            <TableRow>
+              <TableCell />
+              <TableCell>WEBSITE URL</TableCell>
+              <TableCell align="center">NO. OF EVALUATIONS</TableCell>
+              <TableCell align="center">SUBMITTED ON</TableCell>
+              <TableCell align="center">ACCESSIBILITY ISSUES</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row, index) => (
+              <Row key={index} row={row} />
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component={Paper}
         count={rows.length}
@@ -213,5 +238,5 @@ export default function CollapsibleTable({stateChanger}: GridProps) {
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </Box>
-  );}
-          
+  );
+}

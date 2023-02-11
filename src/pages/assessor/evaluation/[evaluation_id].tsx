@@ -24,7 +24,9 @@ function assessorEvaluation() {
     const { evaluation_id } = router.query;
     console.log(evaluation_id);
     await axios
-      .get(`http://localhost:8080/api/assessment/${evaluation_id}`)
+      .get(
+        `https://asia-southeast1-starlit-array-328711.cloudfunctions.net/hack4good/api/assessment/${evaluation_id}`
+      )
       .then(function (response) {
         const result = response.data;
         setCompanyName(result.companyName);
