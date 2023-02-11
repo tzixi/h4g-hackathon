@@ -56,9 +56,7 @@ const dataInfo = [
 function Row(props: { row: ReturnType<typeof createData> }) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
-  const [evalTags, setEvalTags] = React.useState();
-  const [evalRemarks, setEvalRemarks] = React.useState();
-  const [disability, setDisability] = React.useState("");
+  const [response, setResponse] = React.useState([]);
 
   var fontCol =
     row.problemCount == 0 ? "green" : row.problemCount >= 10 ? "red" : "orange";
@@ -73,6 +71,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         `https://asia-southeast1-starlit-array-328711.cloudfunctions.net/hack4good/api/assessment/result/${row.id}`
       );
       console.log(response.data);
+      setResponse(response.data);
     } catch (error) {
       console.error(error);
     }
@@ -113,20 +112,24 @@ function Row(props: { row: ReturnType<typeof createData> }) {
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow>
-                    <TableCell align="center">Assesor Name</TableCell>
-                    <TableCell align="center">Assessor Disability</TableCell>
+                    <TableCell align="center">
+                      Assessor's Disability Profile
+                    </TableCell>
+                    <TableCell align="center">Assessor Tags</TableCell>
                     <TableCell align="center">Assesor Remarks</TableCell>
                     <TableCell align="center">Feedback</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {row.info.map((infoRow) => (
-                    <TableRow key={infoRow.name}>
+                  {response.map((r) => (
+                    <TableRow key={r.id}>
+                      <TableCell align="center">{r.disability}</TableCell>
                       <TableCell align="center" component="th" scope="row">
-                        {infoRow.name}
+                        {JSON.parse(r.evalTags).join(", ")}
                       </TableCell>
-                      <TableCell align="center">{infoRow.disability}</TableCell>
-                      <TableCell align="center">{infoRow.feedback}</TableCell>
+                      <TableCell align="center">
+                        {JSON.parse(r.evalRemarks).join(", ")}
+                      </TableCell>
                       <TableCell align="center">
                         <Button>
                           <Link onClick={handleLinkClick}>SHOW</Link>
