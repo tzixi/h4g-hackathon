@@ -25,7 +25,8 @@ function assessorEvaluation() {
     console.log(evaluation_id);
     await axios
       .get(
-        `https://asia-southeast1-starlit-array-328711.cloudfunctions.net/hack4good/api/assessment/${evaluation_id}`
+        `https://asia-southeast1-starlit-array-328711.cloudfunctions.net/hack4good/api/assessment/${evaluation_id}`,
+
       )
       .then(function (response) {
         const result = response.data;
