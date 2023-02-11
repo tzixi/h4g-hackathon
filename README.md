@@ -26,6 +26,9 @@ https://docs.google.com/presentation/d/1K3HpKcbNAiW8EnD295R0frCV5i0T0JFR8OszeE--
 5. Assessor Evaluation Form
 6. API Integration (Automatic updates with new forms submitted)
 
+## Design (Figma)
+https://www.figma.com/file/HzpAeG5Q0AyqRLMYiA8VTn/Hack4Good-InclusionLabs-Design?node-id=0%3A1&t=E8hDip78uk38haEC-1
+
 ## Screenshots
 ![image](https://user-images.githubusercontent.com/7589432/218238576-e2cf488d-f3ae-44c0-b7a9-4ea2c60c5fc1.png)
 ![image](https://user-images.githubusercontent.com/7589432/218238608-a475b6c8-3411-4dbc-afbf-dec57fa34399.png)
