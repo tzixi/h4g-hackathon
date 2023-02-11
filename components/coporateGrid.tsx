@@ -10,7 +10,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-import { Button, TablePagination } from '@mui/material';
+import { Button, Link, TablePagination } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import AddIcon from '@mui/icons-material/Add';
@@ -30,25 +30,42 @@ function createData(
     time,
     problemCount,
     info: [
-      {
-        name: 'jon doe',
-        disability: 'idk',
-        feedback: 'lol',
-      },
-      {
-        name: 'jon doe',
-        disability: 'idk',
-        feedback: 'lol',
-      },
+      {name: "",
+      disability: "",
+      feedback: ""}
     ],
   };
 }
+
+const dataInfo = [
+  {
+    name: 'Tan Ah Gow',
+    disability: 'Hearing Impaired',
+    feedback: '-',
+  },
+  {
+    name: 'Tan Ah Meng',
+    disability: 'Colour Blind',
+    feedback: '-',
+  },
+  {
+    name: "John Doe",
+    disability: 'Visual Impairments',
+    feedback: '-'
+  },
+  
+]
 
 function Row(props: { row: ReturnType<typeof createData> }) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
 
   var fontCol = (row.problemCount) == 0 ? "green" : ((row.problemCount >= 10) ? "red" : "orange")
+
+  const handleLinkClick = () => {
+    alert("SHOW FEEDBACK")
+  }
+
 
   return (
     <React.Fragment>
@@ -97,6 +114,11 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                       <TableCell align="center">{infoRow.disability}</TableCell>
                       <TableCell align="center">{infoRow.feedback}</TableCell>
                       <TableCell align="center">
+                      <Button>
+                        <Link onClick={handleLinkClick}>
+                          SHOW
+                        </Link>
+                        </Button> 
                       </TableCell>
                     </TableRow>
                   ))}
@@ -130,21 +152,8 @@ export default function CollapsibleTable({stateChanger}: GridProps) {
       for (var i = 0; i < data.length; i++){
         data[i].index = i + 1;
         data[i].time = new Date(parseInt(data[i].timestamp) * 1000).toLocaleString();
-        data[i].info = [
-          {
-            name: 'jon doe',
-            disability: 'idk',
-            feedback: 'lol',
-          },
-          {
-            name: 'jon doe',
-            disability: 'idk',
-            feedback: 'lol',
-          },
-        ]
-        console.log(data[i].timestamp);
+        data[i].info = dataInfo;
       }
-      console.log(data);
       
       setRows(() => data);
     })  
