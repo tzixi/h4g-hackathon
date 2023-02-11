@@ -32,7 +32,8 @@ https://www.figma.com/file/HzpAeG5Q0AyqRLMYiA8VTn/Hack4Good-InclusionLabs-Design
 ## Screenshots
 ![image](https://user-images.githubusercontent.com/7589432/218238576-e2cf488d-f3ae-44c0-b7a9-4ea2c60c5fc1.png)
 ![image](https://user-images.githubusercontent.com/7589432/218238608-a475b6c8-3411-4dbc-afbf-dec57fa34399.png)
-![image](https://user-images.githubusercontent.com/7589432/218238612-98308874-3dbe-40ef-8594-1e139c2c1780.png)
+![image](https://user-images.githubusercontent.com/7589432/218261626-2910b7ac-4218-44ab-9e34-b8a7f6d16387.png)
+
 
 ## How to Setup:
 1. Clone repo to your computer
