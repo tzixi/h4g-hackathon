@@ -9,7 +9,7 @@ export default function DataGridDemo() {
 
   useEffect(() => {
     fetch(
-      "https://asia-southeast1-starlit-array-328711.cloudfunctions.net/hack4good/api/assessments/visa",
+      "https://asia-southeast1-starlit-array-328711.cloudfunctions.net/hack4good/api/assessments/",
       { mode: "cors" }
     )
       .then((response) => {
